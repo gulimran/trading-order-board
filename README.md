@@ -1,14 +1,17 @@
-Trading Order Board – Solution 
+# Trading Order Board – Solution 
 
-Requirements
+## Requirements
 A trading marketplace has a new requirement to display to its users the demand for silver bars on the market.  They would like to have a Trading Order Board' that can provide them with the order summary with orders with the same price merged together and sorted lowest price first for sell orders and highest price first for buy orders.
 
-How to build
+## How to build
 Use maven command line to run tests and package this application
+
 	mvn clean install
 
-Technologies
+## Technologies
+
 The following technologies used for the ‘Live Order Board’ application:
+
 •	Dependency injection – Spring 4 with JSR-330 annotations
 •	Concurrent Hash Map – In-memory database
 •	Lombok – Assist with boilerplate code in domain objects
@@ -18,20 +21,25 @@ The following technologies used for the ‘Live Order Board’ application:
 •	Mockito – Mocking dependencies 
 •	Hamcrest – For assertion of test results
 
-Assumptions
+## Assumptions
+
 •	To get order summary, user must provide the type of order, i.e. SELL or BUY.
 •	Validation on Order quantity and price are not required at this time.
 •	Database validation for non-existing or duplicate orders is not required at this time.
 •	Java doc is only required for client facing interface
 
-Scenarios
+## Scenarios
+
 See the following feature file:
+
 trading-order-board/src/test/resources/
+
 imran.trading.order.board.acceptance.trading-order-board.feature
 
 Scenarios also listed on next page …
 
-Scenario: Register a sell order consists of user id, order quantity and price per kg.
+### Scenario: Register a sell order consists of user id, order quantity and price per kg.
+
     Given a sell order with:
       User id	Quantity	Price	Type
       user1	3.5	306	SELL
@@ -41,7 +49,8 @@ Scenario: Register a sell order consists of user id, order quantity and price pe
       Quantity	 Price
       3.5	 306
 
-Scenario: Cancel a registered order with the given order id.
+### Scenario: Cancel a registered order with the given order id.
+
     Given a buy order with:
       User id	Quantity	Price	Type
       user2  	1.2	310	BUY
@@ -50,7 +59,8 @@ Scenario: Cancel a registered order with the given order id.
     And when I cancel this order
     Then the trading order board should provide blank summary for "buy" orders
 
-Scenario: The sell orders for the same price should be merged together (even when they are from different users). Also the sell orders on trading order board are ordered with lowest prices first.
+### Scenario: The sell orders for the same price should be merged together (even when they are from different users). Also the sell orders on trading order board are ordered with lowest prices first.
+
     Given multiple sell orders with:
       User id	Quantity	Price	Type
       user1	3.5	306	SELL
@@ -67,7 +77,8 @@ Scenario: The sell orders for the same price should be merged together (even whe
 
     And sell orders are ordered with lowest price first
 
-Scenario: The buy orders for the same price should be merged together (even when they are from different users).  Also the sell orders on live order board are ordered with highest prices first.
+### Scenario: The buy orders for the same price should be merged together (even when they are from different users).  Also the sell orders on live order board are ordered with highest prices first.
+
     Given multiple buy orders with:
       User id	Quantity	Price	Type
       user1	3.5	306	BUY  
